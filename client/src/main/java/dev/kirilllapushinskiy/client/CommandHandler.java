@@ -34,4 +34,26 @@ public class CommandHandler {
         return null;
     }
 
+    public static void start() {
+        if (commands.isEmpty())
+            throw new IllegalStateException("No one command had been registered!");
+        String line;
+        while (true) {
+            System.out.print("Enter command: ");
+            line = scanner.nextLine();
+            System.out.println("Read: " + line + ".");
+            if (line.equalsIgnoreCase(EXIT)) {
+                break;
+            }
+            CommandPackage p = getCommandPackage(line);
+            if (p != null) {
+                System.out.println(p.getPackedCommandName());
+                System.out.println(Arrays.toString(p.getPackedCommandArgs()));
+            } else {
+                System.out.println("Command '" + line + "' not registered!");
+            }
+        }
+        System.out.println("Bye-bye!");
+    }
+
 }
