@@ -1,10 +1,9 @@
 package dev.kirilllapushinskiy.client;
 import dev.kirilllapushinskiy.commands.Command;
+import dev.kirilllapushinskiy.commands.CommandCollection;
 import dev.kirilllapushinskiy.commands.CommandPackage;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 public class CommandHandler {
@@ -13,7 +12,7 @@ public class CommandHandler {
 
     static private final Scanner scanner = new Scanner(System.in);
 
-    static private final List<Command> commands = new ArrayList<Command>(10);
+    static private final CommandCollection commands = new CommandCollection(10);
 
     public static void registration(Command... commands) {
         for (Command c : commands)
@@ -22,16 +21,6 @@ public class CommandHandler {
             } else {
                 CommandHandler.commands.add(c);
             }
-    }
-
-    private static CommandPackage getCommandPackage(String commandName) {
-        for (Command command : commands) {
-            System.out.println("Iter");
-            if (command.is(commandName)) {
-                return CommandPackage.pack(command);
-            }
-        }
-        return null;
     }
 
     public static void start() {
@@ -44,9 +33,8 @@ public class CommandHandler {
             System.out.println("Read: " + line + ".");
             if (line.equalsIgnoreCase(EXIT)) {
                 break;
-            }
-            CommandPackage p = getCommandPackage(line);
-            if (p != null) {
+            } else if (commands.conclude(line)) {
+                CommandPackage p = commands.getCommandPackage(line);
                 System.out.println(p.getPackedCommandName());
                 System.out.println(Arrays.toString(p.getPackedCommandArgs()));
             } else {
