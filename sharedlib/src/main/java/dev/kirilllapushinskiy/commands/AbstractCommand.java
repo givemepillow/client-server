@@ -57,9 +57,12 @@ abstract class AbstractCommand implements Command, Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Command that = (Command) o;
-        return commandName.equals(that.getCommandName());
+        if (o instanceof Command) {
+            Command that = (Command) o;
+            return getCommandName().equalsIgnoreCase(that.getCommandName());
+        } else {
+            return false;
+        }
     }
 
     public Boolean is(String commandName) {
