@@ -1,6 +1,8 @@
 package dev.kirilllapushinskiy.commands;
 
-public class CommandPackage {
+import java.io.Serializable;
+
+public class CommandPackage implements Serializable {
     private CommandPackage() {}
 
     private String packedCommandName;
