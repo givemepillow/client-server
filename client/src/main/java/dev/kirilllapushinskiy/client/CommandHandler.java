@@ -24,4 +24,14 @@ public class CommandHandler {
             }
     }
 
+    private static CommandPackage getCommandPackage(String commandName) {
+        for (Command command : commands) {
+            System.out.println("Iter");
+            if (command.is(commandName)) {
+                return CommandPackage.pack(command);
+            }
+        }
+        return null;
+    }
+
 }
