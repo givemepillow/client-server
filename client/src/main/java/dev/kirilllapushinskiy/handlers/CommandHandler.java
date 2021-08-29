@@ -1,4 +1,4 @@
-package dev.kirilllapushinskiy.client;
+package dev.kirilllapushinskiy.handlers;
 import dev.kirilllapushinskiy.commands.Command;
 import dev.kirilllapushinskiy.commands.CommandCollection;
 
@@ -37,8 +37,6 @@ public class CommandHandler {
                 } else if (CommandParser.withArgs()) {
                     c.setCommandArgs(CommandParser.getCommandArgs());
                 }
-
-                //CommandPackage pack = CommandPackage.pack(c);
 
             } else {
                 System.out.println("Command '" + CommandParser.getCommandName() + "' not recognized!");

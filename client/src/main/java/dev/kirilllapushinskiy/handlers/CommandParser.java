@@ -1,4 +1,4 @@
-package dev.kirilllapushinskiy.client;
+package dev.kirilllapushinskiy.handlers;
 
 
 import java.util.*;
