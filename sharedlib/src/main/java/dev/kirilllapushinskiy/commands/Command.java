@@ -10,6 +10,8 @@ public interface Command {
 
     Boolean requiredArgs();
 
+    void setCommandArgs(String[] args);
+
     @Override
     boolean equals(Object o);
 
