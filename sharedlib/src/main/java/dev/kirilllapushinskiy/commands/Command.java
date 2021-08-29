@@ -1,6 +1,6 @@
 package dev.kirilllapushinskiy.commands;
 
-interface Command {
+public interface Command {
 
     String getCommandName();
 
@@ -10,4 +10,8 @@ interface Command {
 
     Boolean requiredArgs();
 
+    @Override
+    boolean equals(Object o);
+
+    Boolean is(String commandName);
 }
