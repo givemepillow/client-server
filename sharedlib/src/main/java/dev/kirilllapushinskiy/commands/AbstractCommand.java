@@ -1,6 +1,8 @@
 package dev.kirilllapushinskiy.commands;
 
-abstract class AbstractCommand implements Command {
+import java.io.Serializable;
+
+abstract class AbstractCommand implements Command, Serializable {
 
     protected final String commandName;
 
@@ -28,7 +30,7 @@ abstract class AbstractCommand implements Command {
         this.withArgs = false;
     }
 
-    public AbstractCommand(String commandName, boolean requiredArgs) {
+    protected AbstractCommand(String commandName, boolean requiredArgs) {
         this.commandName = commandName;
         this.requiredArgs = requiredArgs;
     }
@@ -47,7 +49,20 @@ abstract class AbstractCommand implements Command {
         return requiredArgs;
     }
 
-    public void run() {
-        System.out.println("RUN: TEST_COMMAND.");
+    @Override
+    public String toString() {
+        return this.getCommandName();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Command that = (Command) o;
+        return commandName.equals(that.getCommandName());
+    }
+
+    public Boolean is(String commandName) {
+        return getCommandName().equalsIgnoreCase(commandName);
     }
 }
