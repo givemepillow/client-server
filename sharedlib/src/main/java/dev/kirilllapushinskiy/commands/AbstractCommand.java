@@ -12,24 +12,6 @@ abstract class AbstractCommand implements Command, Serializable {
 
     protected String[] commandArgs;
 
-    protected void initializer(String[] commandArgs) {
-        if (requiredArgs && commandArgs == null) {
-            throw new IllegalArgumentException();
-        } else if (commandArgs != null) {
-            this.commandArgs = commandArgs;
-            this.withArgs = true;
-        } else {
-            this.commandArgs = null;
-            this.withArgs = false;
-        }
-    }
-
-    protected void initializer() {
-        if (requiredArgs) throw new IllegalStateException();
-        this.commandArgs = null;
-        this.withArgs = false;
-    }
-
     protected AbstractCommand(String commandName, boolean requiredArgs) {
         this.commandName = commandName;
         this.requiredArgs = requiredArgs;
@@ -62,6 +44,18 @@ abstract class AbstractCommand implements Command, Serializable {
             return getCommandName().equalsIgnoreCase(that.getCommandName());
         } else {
             return false;
+        }
+    }
+
+    public void setCommandArgs(String[] args) {
+        if (requiredArgs && args == null) {
+            throw new IllegalArgumentException();
+        } else if (args != null) {
+            this.commandArgs = args;
+            this.withArgs = true;
+        } else {
+            this.commandArgs = null;
+            this.withArgs = false;
         }
     }
 
