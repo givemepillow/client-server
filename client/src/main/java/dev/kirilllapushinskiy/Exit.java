@@ -1,7 +1,6 @@
 package dev.kirilllapushinskiy;
 
 import dev.kirilllapushinskiy.commands.AbstractCommand;
-import dev.kirilllapushinskiy.commands.TestCommand1;
 
 public class Exit extends AbstractCommand {
 
@@ -16,5 +15,4 @@ public class Exit extends AbstractCommand {
     }
 
     private static final Exit INSTANCE = new Exit();
-
 }
