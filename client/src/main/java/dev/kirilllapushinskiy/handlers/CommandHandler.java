@@ -39,7 +39,8 @@ public class CommandHandler {
                     }
 
                 } else if (CommandParser.withArgs()) {
-                    c.setCommandArgs(CommandParser.getCommandArgs());
+                    System.out.println("The command does not require arguments!");
+                    continue;
                 }
 
                 return c;
