@@ -2,7 +2,7 @@ package dev.kirilllapushinskiy.commands;
 
 import java.io.Serializable;
 
-abstract class AbstractCommand implements Command, Serializable {
+public abstract class AbstractCommand implements Command, Serializable {
 
     protected final String commandName;
 
@@ -24,9 +24,11 @@ abstract class AbstractCommand implements Command, Serializable {
     public String[] getCommandArgs() {
         return commandArgs;
     }
+
     public Boolean withArgs() {
         return withArgs;
     }
+
     public Boolean requiredArgs() {
         return requiredArgs;
     }
