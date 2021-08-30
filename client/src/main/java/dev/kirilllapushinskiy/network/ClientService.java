@@ -12,13 +12,15 @@ import java.nio.channels.DatagramChannel;
 
 public class ClientService {
 
+    private static final int DEFAULT_SERVER_PORT = 5000;
+
     private static DatagramChannel datagramChannel;
 
     private static InetSocketAddress serverAddress;
 
     static public void initialization() throws IOException {
         DatagramChannel channel = DatagramChannel.open();
-        serverAddress = new InetSocketAddress(InetAddress.getLocalHost(), 5000);
+        serverAddress = new InetSocketAddress(InetAddress.getLocalHost(), DEFAULT_SERVER_PORT);
         datagramChannel = channel;
     }
 
