@@ -19,9 +19,7 @@ public class ClientService {
     private static InetSocketAddress serverAddress;
 
     static public void initialization() throws IOException {
-        DatagramChannel channel = DatagramChannel.open();
-        serverAddress = new InetSocketAddress(InetAddress.getLocalHost(), DEFAULT_SERVER_PORT);
-        datagramChannel = channel;
+        initialization(InetAddress.getLocalHost(), DEFAULT_SERVER_PORT);
     }
 
     static public void initialization(InetAddress address, int port) throws IOException {
