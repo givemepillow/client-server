@@ -40,4 +40,11 @@ public abstract class AbstractCommunicator {
         return in.readObject();
     }
 
+    static private void sendMessage(Message message) throws IOException {
+        ByteBuffer byteMessage = serialize(message);
+        datagramChannel.send(byteMessage, serverAddress);
+    }
+
+
+
 }
