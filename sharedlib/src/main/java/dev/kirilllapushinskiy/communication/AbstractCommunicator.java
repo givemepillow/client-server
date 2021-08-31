@@ -45,6 +45,13 @@ public abstract class AbstractCommunicator {
         datagramChannel.send(byteMessage, serverAddress);
     }
 
-
+    static private Message receiveMassage() throws IOException, ClassNotFoundException {
+        ByteBuffer buffer = ByteBuffer.allocate(1024);
+        datagramChannel.receive(buffer);
+        buffer.flip();
+        ByteBuffer byteMessage = ByteBuffer.allocate(buffer.limit());
+        byteMessage.get(buffer.array(), 0, buffer.limit());
+        return (Message) deserialize(byteMessage);
+    }
 
 }
