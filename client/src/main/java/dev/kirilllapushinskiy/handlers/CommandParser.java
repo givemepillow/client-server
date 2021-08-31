@@ -1,11 +1,13 @@
 package dev.kirilllapushinskiy.handlers;
 
 
+import dev.kirilllapushinskiy.core.Utils;
+
 import java.util.*;
 
 public class CommandParser {
 
-    static private final Scanner scanner = new Scanner(System.in);
+    static private final Scanner scanner = Utils.getScanner();
 
     static private String commandName;
 
@@ -40,10 +42,6 @@ public class CommandParser {
 
     static public boolean withArgs() {
         return commandArgs != null;
-    }
-
-    static public boolean commandEquals(String str) {
-        return commandName.equalsIgnoreCase(str);
     }
 
 }

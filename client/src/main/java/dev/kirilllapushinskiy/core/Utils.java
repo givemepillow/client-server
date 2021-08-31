@@ -1,4 +1,4 @@
-package dev.kirilllapushinskiy;
+package dev.kirilllapushinskiy.core;
 
 import java.util.Scanner;
 
