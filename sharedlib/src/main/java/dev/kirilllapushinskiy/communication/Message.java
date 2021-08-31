@@ -1,6 +1,8 @@
 package dev.kirilllapushinskiy.communication;
 
-abstract class Message {
+import java.io.Serializable;
+
+public abstract class Message implements Serializable {
 
     protected String data;
 
