@@ -34,12 +34,12 @@ public class CommandHandler {
                     if (CommandParser.withArgs()) {
                         c.setCommandArgs(CommandParser.getCommandArgs());
                     } else {
-                        System.out.println("Command require arguments!");
+                        System.out.println("Command require arguments!\n");
                         continue;
                     }
 
                 } else if (CommandParser.withArgs()) {
-                    System.out.println("The command does not require arguments!");
+                    System.out.println("The command does not require arguments!\n");
                     continue;
                 }
 
@@ -47,7 +47,7 @@ public class CommandHandler {
 
             } else {
 
-                System.out.println("Command '" + CommandParser.getCommandName() + "' not recognized!");
+                System.out.println("Command '" + CommandParser.getCommandName() + "' not recognized!\n");
 
             }
         }
