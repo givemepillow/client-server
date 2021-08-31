@@ -1,9 +1,6 @@
 package dev.kirilllapushinskiy.communication;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
@@ -37,8 +34,10 @@ public abstract class AbstractCommunicator {
         return ByteBuffer.wrap(bos.toByteArray());
     }
 
-    static public void communicationProccess(InetSocketAddress address) {
-
+    static protected Object deserialize(ByteBuffer buffer) throws IOException, ClassNotFoundException {
+        ByteArrayInputStream bis = new ByteArrayInputStream(buffer.array());
+        ObjectInputStream in = new ObjectInputStream(bis);
+        return in.readObject();
     }
 
 }
