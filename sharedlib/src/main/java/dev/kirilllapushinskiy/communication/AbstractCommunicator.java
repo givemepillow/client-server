@@ -8,11 +8,11 @@ import java.nio.channels.DatagramChannel;
 
 public abstract class AbstractCommunicator {
 
-    private static final int DEFAULT_SERVER_PORT = 5000;
+    protected static final int DEFAULT_SERVER_PORT = 5000;
 
-    private static DatagramChannel datagramChannel;
+    protected static DatagramChannel datagramChannel;
 
-    private static InetSocketAddress serverAddress;
+    protected static InetSocketAddress serverAddress;
 
     protected AbstractCommunicator() {}
 
