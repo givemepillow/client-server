@@ -1,11 +1,12 @@
-package dev.kirilllapushinskiy;
+package dev.kirilllapushinskiy.core;
 
 import dev.kirilllapushinskiy.commands.Command;
 import dev.kirilllapushinskiy.commands.CommandPackage;
 import dev.kirilllapushinskiy.commands.TestCommand1;
 import dev.kirilllapushinskiy.commands.TestCommand2;
 import dev.kirilllapushinskiy.handlers.CommandHandler;
-import dev.kirilllapushinskiy.network.ClientService;
+import dev.kirilllapushinskiy.network.Client;
+import dev.kirilllapushinskiy.network.Communicator;
 
 import java.io.IOException;
 
@@ -26,10 +27,10 @@ public class App {
         );
 
         try {
-            ClientService.initialization();
+            Client.initialization();
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("\nConnection could not be set up. :(");
+            System.out.println("\n[ERROR] Connection could not be set up. :(");
             return;
         }
 
@@ -46,7 +47,13 @@ public class App {
 
             CommandPackage pack = CommandPackage.pack(command);
 
-            System.out.println(pack.getPackedCommandName());
+            try {
+                Communicator.remoteCommandExecutionProcess(pack);
+            } catch (IOException e) {
+                System.out.println("[ERROR] The command could not be sent to the server. Please, try later...\n");
+            } catch (ClassNotFoundException e) {
+                System.out.println("[ERROR] The response from the server could not be processed!");
+            }
         }
     }
 
