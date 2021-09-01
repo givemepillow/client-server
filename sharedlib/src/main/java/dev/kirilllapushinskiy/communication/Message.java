@@ -11,8 +11,9 @@ public abstract class Message implements Serializable {
         this.data = message;
     }
 
-    protected String getMessage() {
+    public String getMessage() {
         if (data == null) throw new IllegalStateException("Empty message!");
         return this.data;
     }
+
 }
