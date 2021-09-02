@@ -2,19 +2,9 @@ package dev.kirilllapushinskiy.handlers;
 
 import dev.kirilllapushinskiy.commands.Command;
 import dev.kirilllapushinskiy.commands.CommandCollection;
+import dev.kirilllapushinskiy.commands.CommandRegistrator;
 
-public class CommandHandler {
-
-    static private final CommandCollection commands = new CommandCollection(10);
-
-    public static void registration(Command... commands) {
-        for (Command c : commands)
-            if (CommandHandler.commands.contains(c)) {
-                throw new IllegalStateException(c + "already in commands!");
-            } else {
-                CommandHandler.commands.add(c);
-            }
-    }
+public class CommandHandler extends CommandRegistrator {
 
     public static Command start() {
 
