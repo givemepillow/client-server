@@ -1,4 +1,7 @@
-package dev.kirilllapushinskiy.commands;
+package dev.kirilllapushinskiy.core;
+
+import dev.kirilllapushinskiy.commands.AbstractCommand;
+import dev.kirilllapushinskiy.communication.Session;
 
 public class TestCommand1 extends AbstractCommand {
 
@@ -14,4 +17,6 @@ public class TestCommand1 extends AbstractCommand {
 
     private static final TestCommand1 INSTANCE = new TestCommand1();
 
+    @Override
+    public void run(Session session) {}
 }
