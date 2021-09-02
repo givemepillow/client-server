@@ -1,6 +1,7 @@
 package dev.kirilllapushinskiy.core;
 
 import dev.kirilllapushinskiy.commands.AbstractCommand;
+import dev.kirilllapushinskiy.communication.Session;
 
 public class Info extends AbstractCommand {
 
@@ -16,4 +17,6 @@ public class Info extends AbstractCommand {
 
     private static final Info INSTANCE = new Info();
 
+    @Override
+    public void run(Session session) {}
 }

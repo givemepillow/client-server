@@ -1,6 +1,7 @@
 package dev.kirilllapushinskiy.core;
 
 import dev.kirilllapushinskiy.commands.AbstractCommand;
+import dev.kirilllapushinskiy.communication.Session;
 
 public class Exit extends AbstractCommand {
 
@@ -15,4 +16,7 @@ public class Exit extends AbstractCommand {
     }
 
     private static final Exit INSTANCE = new Exit();
+
+    @Override
+    public void run(Session session) {}
 }
