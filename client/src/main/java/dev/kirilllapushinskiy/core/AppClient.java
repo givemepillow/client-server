@@ -1,33 +1,35 @@
 package dev.kirilllapushinskiy.core;
 
-import dev.kirilllapushinskiy.commands.Command;
-import dev.kirilllapushinskiy.commands.CommandPackage;
-import dev.kirilllapushinskiy.commands.TestCommand1;
-import dev.kirilllapushinskiy.commands.TestCommand2;
+import dev.kirilllapushinskiy.commands.*;
 import dev.kirilllapushinskiy.handlers.CommandHandler;
 import dev.kirilllapushinskiy.network.Client;
 import dev.kirilllapushinskiy.network.Communicator;
 
 import java.io.IOException;
+import java.net.InetAddress;
 
-public class App {
+public class AppClient {
 
     static private final Command EXIT = Exit.init();
     static private final Command TEST1 = TestCommand1.init();
-    static private final Command TEST2 = TestCommand2.init();
     static private final Command INFO = Info.init();
+    static private final Command HELP = Help.init();
+    static private final Command HISTORY = History.init();
+    static private final Command SHOW = Show.init();
 
     public static void main(String[] args) {
 
         CommandHandler.registration(
                 EXIT,
                 TEST1,
-                TEST2,
-                INFO
+                INFO,
+                HELP,
+                HISTORY,
+                SHOW
         );
 
         try {
-            Client.initialization();
+            Client.initialization(InetAddress.getLocalHost(), 8000);
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("\n[ERROR] Connection could not be set up. :(");
