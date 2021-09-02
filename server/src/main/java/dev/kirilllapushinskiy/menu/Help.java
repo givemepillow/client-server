@@ -2,7 +2,7 @@ package dev.kirilllapushinskiy.menu;
 
 
 import dev.kirilllapushinskiy.commands.AbstractCommand;
-import dev.kirilllapushinskiy.communication.AnswerMessage;
+import dev.kirilllapushinskiy.communication.FinishMessage;
 import dev.kirilllapushinskiy.communication.Message;
 import dev.kirilllapushinskiy.communication.Session;
 
@@ -40,7 +40,7 @@ public class Help extends AbstractCommand {
                     "print_unique_weapon_type : вывести уникальные значения поля weaponType всех элементов в коллекции\n";
 
     public void run(Session session) {
-        Message message = new AnswerMessage(help);
+        Message message = new FinishMessage(help);
         session.setMessage(message);
         super.run(session);
     }

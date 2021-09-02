@@ -1,7 +1,7 @@
 package dev.kirilllapushinskiy.menu;
 
 import dev.kirilllapushinskiy.commands.AbstractCommand;
-import dev.kirilllapushinskiy.communication.AnswerMessage;
+import dev.kirilllapushinskiy.communication.FinishMessage;
 import dev.kirilllapushinskiy.communication.Message;
 import dev.kirilllapushinskiy.communication.Session;
 
@@ -26,7 +26,7 @@ public class History extends AbstractCommand {
         for (String text : session.getHistory()) {
             answer.append("\n").append(text);
         }
-        Message message = new AnswerMessage(answer.toString());
+        Message message = new FinishMessage(answer.toString());
         session.setMessage(message);
         super.run(session);
     }

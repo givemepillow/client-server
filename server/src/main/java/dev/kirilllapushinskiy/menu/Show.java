@@ -2,7 +2,7 @@ package dev.kirilllapushinskiy.menu;
 
 
 import dev.kirilllapushinskiy.commands.AbstractCommand;
-import dev.kirilllapushinskiy.communication.AnswerMessage;
+import dev.kirilllapushinskiy.communication.FinishMessage;
 import dev.kirilllapushinskiy.communication.Session;
 import dev.kirilllapushinskiy.core.HumanBeing;
 import dev.kirilllapushinskiy.core.AppServer;
@@ -31,7 +31,7 @@ public class Show extends AbstractCommand {
                 answer.append(humanBeing);
             }
         }
-        session.setMessage(new AnswerMessage(answer.toString()));
+        session.setMessage(new FinishMessage(answer.toString()));
 
     }
 }
