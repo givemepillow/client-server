@@ -1,5 +1,7 @@
 package dev.kirilllapushinskiy.commands;
 
+import dev.kirilllapushinskiy.communication.Session;
+
 public interface Command {
 
     String getCommandName();
@@ -16,4 +18,9 @@ public interface Command {
     boolean equals(Object o);
 
     Boolean is(String commandName);
+
+    default void run(Session session) {
+        session.addHistory(getCommandName());
+    }
+
 }
