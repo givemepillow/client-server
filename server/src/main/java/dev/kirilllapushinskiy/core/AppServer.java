@@ -3,9 +3,11 @@ package dev.kirilllapushinskiy.core;
 import dev.kirilllapushinskiy.commands.Command;
 import dev.kirilllapushinskiy.menu.Help;
 import dev.kirilllapushinskiy.menu.History;
+import dev.kirilllapushinskiy.menu.RemoveById;
 import dev.kirilllapushinskiy.menu.Show;
 
 import java.io.IOException;
+import java.rmi.Remote;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -16,6 +18,7 @@ public class AppServer {
     static private final Command HELP = Help.init();
     static private final Command HISTORY = History.init();
     static private final Command SHOW = Show.init();
+    static private final Command REMOVEBYID = RemoveById.init();
 
     public static void main(String[] args) throws IOException {
 
@@ -26,7 +29,8 @@ public class AppServer {
         ServerCommandHandler.registration(
                 HELP,
                 HISTORY,
-                SHOW
+                SHOW,
+                REMOVEBYID
         );
 
         Server.start();

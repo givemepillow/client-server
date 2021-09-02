@@ -16,6 +16,7 @@ public class AppClient {
     static private final Command HELP = Help.init();
     static private final Command HISTORY = History.init();
     static private final Command SHOW = Show.init();
+    static private final Command REMOVEBYID = RemoveById.init();
 
     public static void main(String[] args) {
 
@@ -25,7 +26,8 @@ public class AppClient {
                 INFO,
                 HELP,
                 HISTORY,
-                SHOW
+                SHOW,
+                REMOVEBYID
         );
 
         try {
