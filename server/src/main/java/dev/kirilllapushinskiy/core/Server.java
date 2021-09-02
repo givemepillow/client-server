@@ -3,6 +3,7 @@ package dev.kirilllapushinskiy.core;
 import dev.kirilllapushinskiy.commands.Command;
 import dev.kirilllapushinskiy.commands.CommandPackage;
 import dev.kirilllapushinskiy.communication.ErrorMessage;
+import dev.kirilllapushinskiy.communication.FinishMessage;
 import dev.kirilllapushinskiy.communication.Message;
 import dev.kirilllapushinskiy.communication.Serializator;
 
@@ -75,13 +76,25 @@ public class Server {
 
 
                             try {
-                                CommandPackage pack = (CommandPackage) Serializator.deserialize(buffer);
-                                Command command = ServerCommandHandler.handle(pack);
-                                System.out.println("run");
-                                command.run(client);
+                                Object o = Serializator.deserialize(buffer);
+
+                                if (o instanceof CommandPackage) {
+                                    CommandPackage pack = (CommandPackage) o;
+                                    Command command = ServerCommandHandler.handle(pack);
+                                    System.out.println("run");
+                                    command.run(client);
+                                } else if (o instanceof Message) {
+                                    Message msg = (Message) o;
+                                    Command command = ServerCommandHandler.handle(client.currentCommand);
+                                    command.run(client);
+                                }
+
+
                             } catch (IllegalArgumentException | ClassNotFoundException e) {
                                 Message message = new ErrorMessage(e.getMessage());
                                 client.setMessage(message);
+                                client.setState(0);
+                                client.setCurrentCommand(null);
                             }
                             buffer.clear();
 
@@ -95,6 +108,11 @@ public class Server {
                             DatagramChannel ch = (DatagramChannel)key.channel();
 
                             for (SessionClient c : clients) {
+                                Message msg = c.getMessage();
+                                if (msg instanceof ErrorMessage || msg instanceof FinishMessage) {
+                                    c.setState(0);
+                                    c.setCurrentCommand(null);
+                                }
                                 c.sendResponse(ch);
                             }
 
