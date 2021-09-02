@@ -28,7 +28,7 @@ public class Communicator {
         while (accomplishment) {
             Message message = receiveMassage();
              if (message instanceof ErrorMessage) {
-                 System.out.println("(SERVER) [ERROR] " + message.getMessage() + "\n");
+                 System.out.println("(SERVER) [ERROR] " + message.getMessage());
                  accomplishment = false;
              } else if (message instanceof PromptMessage || message instanceof AnswerMessage) {
                  System.out.print("(SERVER) " + message.getMessage().trim() + " ");
@@ -36,7 +36,7 @@ public class Communicator {
                  AnswerMessage answer = new AnswerMessage(line);
                  sendMessage(answer);
              } else if (message instanceof FinishMessage) {
-                System.out.println("(SERVER) " + message.getMessage() + "\n");
+                System.out.println("(SERVER) " + message.getMessage());
                 System.out.println();
                 accomplishment = false;
              }
