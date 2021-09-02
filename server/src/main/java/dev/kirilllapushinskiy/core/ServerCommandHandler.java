@@ -14,5 +14,13 @@ public class ServerCommandHandler extends CommandRegistrator {
 
         return commands.getCommand(commandPackage.getPackedCommandName());
     }
+
+    public static Command handle(String commandName) {
+
+        if (!commands.conclude(commandName))
+            throw new IllegalArgumentException("Undefined command!");
+
+        return commands.getCommand(commandName);
+    }
 }
 
