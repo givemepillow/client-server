@@ -30,12 +30,12 @@ public class Communicator {
              if (message instanceof ErrorMessage) {
                  System.out.println("(SERVER) [ERROR] " + message.getMessage() + "\n");
                  accomplishment = false;
-             } else if (message instanceof PromptMessage) {
+             } else if (message instanceof PromptMessage || message instanceof AnswerMessage) {
                  System.out.print("(SERVER) " + message.getMessage().trim() + " ");
                  String line = scanner.nextLine(); // lol fix: next -> nextLine )))
                  AnswerMessage answer = new AnswerMessage(line);
                  sendMessage(answer);
-             } else if (message instanceof AnswerMessage) {
+             } else if (message instanceof FinishMessage) {
                 System.out.println("(SERVER) " + message.getMessage() + "\n");
                 System.out.println();
                 accomplishment = false;
