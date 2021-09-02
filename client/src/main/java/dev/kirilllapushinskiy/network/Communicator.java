@@ -10,6 +10,8 @@ import java.util.Scanner;
 
 public class Communicator {
 
+    private static final int BUFFER_SIZE = 1024 * 12;
+
     private static final Scanner scanner = Utils.getScanner();
 
     private static final Client client = Client.set();
@@ -34,7 +36,7 @@ public class Communicator {
                  AnswerMessage answer = new AnswerMessage(line);
                  sendMessage(answer);
              } else if (message instanceof AnswerMessage) {
-                System.out.println("(SERVER) + " + message.getMessage() + "\n");
+                System.out.println("(SERVER) " + message.getMessage() + "\n");
                 System.out.println();
                 accomplishment = false;
              }
@@ -47,7 +49,7 @@ public class Communicator {
     }
 
     static protected Message receiveMassage() throws IOException, ClassNotFoundException {
-        ByteBuffer buffer = ByteBuffer.allocate(1024);
+        ByteBuffer buffer = ByteBuffer.allocate(BUFFER_SIZE);
         client.receive(buffer);
         return (Message) Serializator.deserialize(buffer);
     }
