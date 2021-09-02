@@ -23,6 +23,17 @@ public class SessionClient implements Session {
         this.message = message;
     }
 
+    @Override
+    public Message getMessage() {
+        return message;
+    }
+
+    String currentCommand = null;
+
+    int state = 0;
+
+    String response = null;
+
     public void sendResponse(DatagramChannel channel) throws IOException {
 
         if (address == null) throw new IllegalStateException("Address is null!");
@@ -42,6 +53,36 @@ public class SessionClient implements Session {
             history.removeFirst();
         }
         history.add(text);
+    }
+
+    @Override
+    public String getCurrentCommand() {
+        return currentCommand;
+    }
+
+    @Override
+    public void upState() {
+        state += 1;
+    }
+
+    @Override
+    public int getState() {
+        return state;
+    }
+
+    @Override
+    public void setCurrentCommand(String commandName) {
+        currentCommand = commandName;
+    }
+
+    @Override
+    public void setState(int i) {
+        state = i;
+    }
+
+    @Override
+    public String getResponse() {
+        return response;
     }
 
 }

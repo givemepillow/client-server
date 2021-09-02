@@ -7,6 +7,8 @@ public interface Session {
 
     void setMessage(Message message);
 
+    Message getMessage();
+
     Deque<String> history = new ArrayDeque<>();
 
     default Deque<String> getHistory() {
@@ -14,5 +16,17 @@ public interface Session {
     }
 
     void addHistory(String text);
+
+    String getCurrentCommand();
+
+    void upState();
+
+    int getState();
+
+    void setCurrentCommand(String commandName);
+
+    void setState(int i);
+
+    String getResponse();
 
 }
