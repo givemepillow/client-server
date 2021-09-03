@@ -17,7 +17,7 @@ public class AppClient {
     static private final Command HISTORY = History.init();
     static private final Command SHOW = Show.init();
     static private final Command REMOVEBYID = RemoveById.init();
-    static private final Command MAXSOUNDTRACK = RemoveById.init();
+    static private final Command MAXSOUNDTRACK = MaxSoundtrack.init();
 
     public static void main(String[] args) {
 
