@@ -19,6 +19,10 @@ public interface Session {
 
     String getCurrentCommand();
 
+    String[] getArgs();
+
+    void setArgs(String[] args);
+
     void upState();
 
     int getState();

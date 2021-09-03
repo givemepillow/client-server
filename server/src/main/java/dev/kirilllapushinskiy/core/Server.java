@@ -81,6 +81,11 @@ public class Server {
                                 if (o instanceof CommandPackage) {
                                     CommandPackage pack = (CommandPackage) o;
                                     Command command = ServerCommandHandler.handle(pack);
+
+                                    if (command.withArgs()) {
+                                        client.setArgs(command.getCommandArgs());
+                                    }
+
                                     System.out.println("run");
                                     command.run(client);
                                 } else if (o instanceof Message) {

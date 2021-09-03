@@ -23,6 +23,8 @@ public class SessionClient implements Session {
         this.message = message;
     }
 
+    private String[] args;
+
     @Override
     public Message getMessage() {
         return message;
@@ -58,6 +60,16 @@ public class SessionClient implements Session {
     @Override
     public String getCurrentCommand() {
         return currentCommand;
+    }
+
+    @Override
+    public String[] getArgs() {
+        return this.args;
+    }
+
+    @Override
+    public void setArgs(String[] args) {
+        this.args = args;
     }
 
     @Override
