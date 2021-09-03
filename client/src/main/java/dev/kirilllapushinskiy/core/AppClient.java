@@ -17,6 +17,7 @@ public class AppClient {
     static private final Command HISTORY = History.init();
     static private final Command SHOW = Show.init();
     static private final Command REMOVEBYID = RemoveById.init();
+    static private final Command MAXSOUNDTRACK = RemoveById.init();
 
     public static void main(String[] args) {
 
@@ -27,7 +28,8 @@ public class AppClient {
                 HELP,
                 HISTORY,
                 SHOW,
-                REMOVEBYID
+                REMOVEBYID,
+                MAXSOUNDTRACK
         );
 
         try {
