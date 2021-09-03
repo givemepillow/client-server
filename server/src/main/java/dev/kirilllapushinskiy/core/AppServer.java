@@ -7,7 +7,6 @@ import dev.kirilllapushinskiy.menu.RemoveById;
 import dev.kirilllapushinskiy.menu.Show;
 
 import java.io.IOException;
-import java.rmi.Remote;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -19,6 +18,7 @@ public class AppServer {
     static private final Command HISTORY = History.init();
     static private final Command SHOW = Show.init();
     static private final Command REMOVEBYID = RemoveById.init();
+    static private final Command MAXSOUNDTRACK = RemoveById.init();
 
     public static void main(String[] args) throws IOException {
 
@@ -30,7 +30,8 @@ public class AppServer {
                 HELP,
                 HISTORY,
                 SHOW,
-                REMOVEBYID
+                REMOVEBYID,
+                MAXSOUNDTRACK
         );
 
         Server.start();
