@@ -1,10 +1,7 @@
 package dev.kirilllapushinskiy.core;
 
 import dev.kirilllapushinskiy.commands.Command;
-import dev.kirilllapushinskiy.menu.Help;
-import dev.kirilllapushinskiy.menu.History;
-import dev.kirilllapushinskiy.menu.RemoveById;
-import dev.kirilllapushinskiy.menu.Show;
+import dev.kirilllapushinskiy.menu.*;
 
 import java.io.IOException;
 import java.util.SortedSet;
@@ -18,7 +15,7 @@ public class AppServer {
     static private final Command HISTORY = History.init();
     static private final Command SHOW = Show.init();
     static private final Command REMOVEBYID = RemoveById.init();
-    static private final Command MAXSOUNDTRACK = RemoveById.init();
+    static private final Command MAXSOUNDTRACK = MaxSoundtrack.init();
 
     public static void main(String[] args) throws IOException {
 
