@@ -15,7 +15,7 @@ public class MaxSoundtrack extends AbstractCommand {
     static private final String COMMAND_NAME = "MaxSoundtrack";
 
     protected MaxSoundtrack() {
-        super(COMMAND_NAME, true);
+        super(COMMAND_NAME, false);
     }
 
     public static MaxSoundtrack init() {
