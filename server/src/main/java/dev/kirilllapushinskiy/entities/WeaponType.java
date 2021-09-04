@@ -1,4 +1,4 @@
-package dev.kirilllapushinskiy.core;
+package dev.kirilllapushinskiy.entities;
 
 public enum WeaponType implements Comparable<WeaponType> {
     AXE,

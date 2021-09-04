@@ -1,4 +1,4 @@
-package dev.kirilllapushinskiy.core;
+package dev.kirilllapushinskiy.entities;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 

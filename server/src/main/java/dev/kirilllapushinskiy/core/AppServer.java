@@ -1,6 +1,7 @@
 package dev.kirilllapushinskiy.core;
 
 import dev.kirilllapushinskiy.commands.Command;
+import dev.kirilllapushinskiy.entities.HumanBeing;
 import dev.kirilllapushinskiy.menu.*;
 
 import java.io.IOException;

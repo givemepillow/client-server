@@ -4,7 +4,7 @@ package dev.kirilllapushinskiy.menu;
 import dev.kirilllapushinskiy.commands.AbstractCommand;
 import dev.kirilllapushinskiy.communication.FinishMessage;
 import dev.kirilllapushinskiy.communication.Session;
-import dev.kirilllapushinskiy.core.HumanBeing;
+import dev.kirilllapushinskiy.entities.HumanBeing;
 import dev.kirilllapushinskiy.core.AppServer;
 
 public class Show extends AbstractCommand {

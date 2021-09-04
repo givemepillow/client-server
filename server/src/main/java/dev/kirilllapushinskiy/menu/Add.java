@@ -3,6 +3,7 @@ package dev.kirilllapushinskiy.menu;
 import dev.kirilllapushinskiy.commands.AbstractCommand;
 import dev.kirilllapushinskiy.communication.*;
 import dev.kirilllapushinskiy.core.*;
+import dev.kirilllapushinskiy.entities.*;
 
 import java.time.ZonedDateTime;
 import java.util.Comparator;

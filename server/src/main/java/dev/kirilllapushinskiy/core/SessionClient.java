@@ -3,6 +3,7 @@ package dev.kirilllapushinskiy.core;
 import dev.kirilllapushinskiy.communication.Message;
 import dev.kirilllapushinskiy.communication.Serializator;
 import dev.kirilllapushinskiy.communication.Session;
+import dev.kirilllapushinskiy.entities.HumanBeing;
 
 import java.io.IOException;
 import java.net.SocketAddress;

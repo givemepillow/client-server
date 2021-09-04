@@ -1,6 +1,7 @@
-package dev.kirilllapushinskiy.core;
+package dev.kirilllapushinskiy.entities;
 
 import com.fasterxml.jackson.annotation.*;
+
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 

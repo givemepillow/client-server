@@ -5,7 +5,7 @@ import dev.kirilllapushinskiy.communication.ErrorMessage;
 import dev.kirilllapushinskiy.communication.FinishMessage;
 import dev.kirilllapushinskiy.communication.Session;
 import dev.kirilllapushinskiy.core.AppServer;
-import dev.kirilllapushinskiy.core.HumanBeing;
+import dev.kirilllapushinskiy.entities.HumanBeing;
 
 import java.util.Comparator;
 

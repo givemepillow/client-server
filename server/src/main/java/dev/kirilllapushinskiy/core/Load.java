@@ -1,6 +1,7 @@
 package dev.kirilllapushinskiy.core;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import dev.kirilllapushinskiy.entities.HumanBeing;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
