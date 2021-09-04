@@ -6,18 +6,18 @@ import java.time.format.DateTimeFormatter;
 
 
 public class HumanBeing implements Comparable<HumanBeing> {
-    private Integer id;
-    private String name;
-    private Coordinates coordinates;
+    public Integer id;
+    public String name;
+    public Coordinates coordinates;
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
-    private ZonedDateTime creationDate;
-    private Boolean realHero;
-    private Boolean hasToothpick;
-    private Double impactSpeed;
-    private String soundtrackName;
-    private WeaponType weaponType;
-    private Mood mood;
-    private Car car;
+    public ZonedDateTime creationDate;
+    public Boolean realHero;
+    public Boolean hasToothpick;
+    public Double impactSpeed;
+    public String soundtrackName;
+    public WeaponType weaponType;
+    public Mood mood;
+    public Car car;
 
     @JsonCreator
     public HumanBeing() {}
