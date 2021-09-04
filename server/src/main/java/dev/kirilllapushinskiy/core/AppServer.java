@@ -16,6 +16,7 @@ public class AppServer {
     static private final Command SHOW = Show.init();
     static private final Command REMOVEBYID = RemoveById.init();
     static private final Command MAXSOUNDTRACK = MaxSoundtrack.init();
+    static private final Command ADD = Add.init();
 
     public static void main(String[] args) throws IOException {
 
@@ -28,7 +29,8 @@ public class AppServer {
                 HISTORY,
                 SHOW,
                 REMOVEBYID,
-                MAXSOUNDTRACK
+                MAXSOUNDTRACK,
+                ADD
         );
 
         Server.start();

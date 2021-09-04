@@ -20,6 +20,14 @@ public class Car {
 		this.cool = cool;
 	}
 
+	public void setName(String name) {
+    	this.name = name;
+	}
+
+	public void setCool(boolean cool) {
+    	this.cool = cool;
+	}
+
     /**
      * Instantiates a new Car.
      */

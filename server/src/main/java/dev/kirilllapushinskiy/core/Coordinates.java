@@ -11,6 +11,14 @@ public class Coordinates {
         this.y = y;
     }
 
+    public void setX(Long x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
     @JsonCreator
     public Coordinates() {
     }
