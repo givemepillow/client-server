@@ -2,6 +2,7 @@ package dev.kirilllapushinskiy.communication;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.Optional;
 
 public interface Session {
 
@@ -10,6 +11,12 @@ public interface Session {
     Message getMessage();
 
     Deque<String> history = new ArrayDeque<>();
+
+    Object getObject();
+
+    void setObject(Object o);
+
+    void destroyObject();
 
     default Deque<String> getHistory() {
         return history;
@@ -32,5 +39,7 @@ public interface Session {
     void setState(int i);
 
     String getResponse();
+
+    void setResponse(String response);
 
 }

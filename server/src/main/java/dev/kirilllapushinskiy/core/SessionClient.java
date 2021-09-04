@@ -11,30 +11,50 @@ import java.nio.channels.DatagramChannel;
 
 public class SessionClient implements Session {
 
-    private final SocketAddress address;
-
-    private Message message;
-
     public SessionClient(SocketAddress address) {
         this.address = address;
     }
 
+    private final SocketAddress address;
+
+    private Message message;
+
+    private String[] args;
+
+    private Object object;
+
+    private String response;
+
+    private String currentCommand = null;
+
+    int state = 0;
+
     public void setMessage(Message message) {
         this.message = message;
     }
-
-    private String[] args;
 
     @Override
     public Message getMessage() {
         return message;
     }
 
-    String currentCommand = null;
+    @Override
+    public Object getObject() {
+        return object;
+    }
 
-    int state = 0;
+    @Override
+    public void setObject(Object o) {
+        if (!(o instanceof HumanBeing)) throw new IllegalArgumentException("Requires HumanBeing!");
+        this.object = o;
+    }
 
-    String response = null;
+    @Override
+    public void destroyObject() {
+        this.object = null;
+    }
+
+
 
     public void sendResponse(DatagramChannel channel) throws IOException {
 
@@ -96,5 +116,11 @@ public class SessionClient implements Session {
     public String getResponse() {
         return response;
     }
+
+    @Override
+    public void setResponse(String response) {
+        this.response = response;
+    }
+
 
 }
