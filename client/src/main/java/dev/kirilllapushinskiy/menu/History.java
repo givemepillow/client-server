@@ -1,4 +1,4 @@
-package dev.kirilllapushinskiy.core;
+package dev.kirilllapushinskiy.menu;
 
 import dev.kirilllapushinskiy.commands.AbstractCommand;
 

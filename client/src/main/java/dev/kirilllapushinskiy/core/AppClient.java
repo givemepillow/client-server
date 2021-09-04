@@ -2,6 +2,7 @@ package dev.kirilllapushinskiy.core;
 
 import dev.kirilllapushinskiy.commands.*;
 import dev.kirilllapushinskiy.handlers.CommandHandler;
+import dev.kirilllapushinskiy.menu.*;
 import dev.kirilllapushinskiy.network.Client;
 import dev.kirilllapushinskiy.network.Communicator;
 
@@ -11,7 +12,6 @@ import java.net.InetAddress;
 public class AppClient {
 
     static private final Command EXIT = Exit.init();
-    static private final Command TEST1 = TestCommand1.init();
     static private final Command INFO = Info.init();
     static private final Command HELP = Help.init();
     static private final Command HISTORY = History.init();
@@ -24,7 +24,6 @@ public class AppClient {
 
         CommandHandler.registration(
                 EXIT,
-                TEST1,
                 INFO,
                 HELP,
                 HISTORY,

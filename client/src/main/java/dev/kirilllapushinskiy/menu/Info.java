@@ -1,21 +1,21 @@
-package dev.kirilllapushinskiy.core;
+package dev.kirilllapushinskiy.menu;
 
 import dev.kirilllapushinskiy.commands.AbstractCommand;
 import dev.kirilllapushinskiy.communication.Session;
 
-public class Exit extends AbstractCommand {
+public class Info extends AbstractCommand {
 
-    static private final String COMMAND_NAME = "EXIT";
+    static private final String COMMAND_NAME = "INFO";
 
-    private Exit() {
+    private Info() {
         super(COMMAND_NAME, false);
     }
 
-    public static Exit init() {
+    public static Info init() {
         return INSTANCE;
     }
 
-    private static final Exit INSTANCE = new Exit();
+    private static final Info INSTANCE = new Info();
 
     @Override
     public void run(Session session) {}
