@@ -5,6 +5,7 @@ import dev.kirilllapushinskiy.communication.FinishMessage;
 import dev.kirilllapushinskiy.communication.PromptMessage;
 import dev.kirilllapushinskiy.communication.Session;
 import dev.kirilllapushinskiy.core.AppServer;
+import dev.kirilllapushinskiy.core.Save;
 import dev.kirilllapushinskiy.utils.Searcher;
 
 
@@ -32,6 +33,7 @@ public class RemoveById extends AbstractCommand {
             Integer id = Searcher.searchByID(session);
             if (!(id == null)) {
                 AppServer.humanBeings.removeIf((human -> human.getId().equals(id)));
+                Save.run();
                 session.setMessage(new FinishMessage("Объект c номером " + id + " удален из коллекции!"));
             }
         }
