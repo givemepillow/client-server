@@ -76,24 +76,25 @@ public class Server {
 
 
                             try {
+
                                 Object o = Serializator.deserialize(buffer);
 
                                 if (o instanceof CommandPackage) {
                                     CommandPackage pack = (CommandPackage) o;
-                                    Command command = ServerCommandHandler.handle(pack);
+                                    Command messageFromClient = ServerCommandHandler.handle(pack);
 
-                                    if (command.withArgs()) {
-                                        client.setArgs(command.getCommandArgs());
+                                    if (messageFromClient.withArgs()) {
+                                        client.setArgs(messageFromClient.getCommandArgs());
                                     }
 
                                     System.out.println("run");
-                                    command.run(client);
+                                    messageFromClient.run(client);
                                 } else if (o instanceof Message) {
-                                    Message msg = (Message) o;
-                                    Command command = ServerCommandHandler.handle(client.currentCommand);
+                                    Message messageFromClient = (Message) o;
+                                    Command command = ServerCommandHandler.handle(client.getCurrentCommand());
+                                    client.setResponse(messageFromClient.getMessage());
                                     command.run(client);
                                 }
-
 
                             } catch (IllegalArgumentException | ClassNotFoundException e) {
                                 Message message = new ErrorMessage(e.getMessage());
@@ -101,11 +102,8 @@ public class Server {
                                 client.setState(0);
                                 client.setCurrentCommand(null);
                             }
+
                             buffer.clear();
-
-
-
-
                             key.interestOps(SelectionKey.OP_WRITE);
 
                         } else if (key.isWritable()) {
@@ -114,7 +112,7 @@ public class Server {
 
                             for (SessionClient c : clients) {
                                 Message msg = c.getMessage();
-                                if (msg instanceof ErrorMessage || msg instanceof FinishMessage) {
+                                if (msg instanceof FinishMessage) {
                                     c.setState(0);
                                     c.setCurrentCommand(null);
                                 }
