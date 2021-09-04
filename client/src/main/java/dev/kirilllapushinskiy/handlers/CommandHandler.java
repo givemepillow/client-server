@@ -1,7 +1,6 @@
 package dev.kirilllapushinskiy.handlers;
 
 import dev.kirilllapushinskiy.commands.Command;
-import dev.kirilllapushinskiy.commands.CommandCollection;
 import dev.kirilllapushinskiy.commands.CommandRegistrator;
 
 public class CommandHandler extends CommandRegistrator {

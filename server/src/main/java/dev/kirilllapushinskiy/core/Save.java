@@ -16,7 +16,6 @@ public class Save {
 
     public static void run() {
 
-        System.out.println("Сохранение коллекции в файл: ");
         ObjectMapper objectMapper = getObjectMapper();
 
         try {
