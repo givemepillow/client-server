@@ -2,7 +2,7 @@ package dev.kirilllapushinskiy.communication;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.Optional;
+import java.util.List;
 
 public interface Session {
 
@@ -26,7 +26,7 @@ public interface Session {
 
     String getCurrentCommand();
 
-    String[] getArgs();
+    List<String> getArgs();
 
     void setArgs(String[] args);
 

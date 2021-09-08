@@ -74,7 +74,6 @@ public class Server {
                                 clients.add(client);
                             }
 
-
                             try {
 
                                 Object o = Serializator.deserialize(buffer);
@@ -83,11 +82,10 @@ public class Server {
                                     CommandPackage pack = (CommandPackage) o;
                                     Command messageFromClient = ServerCommandHandler.handle(pack);
 
-                                    if (messageFromClient.withArgs()) {
-                                        client.setArgs(messageFromClient.getCommandArgs());
+                                    if (pack.withArgs()) {
+                                        client.setArgs(pack.getPackedCommandArgs());
                                     }
 
-                                    System.out.println("run");
                                     messageFromClient.run(client);
                                 } else if (o instanceof Message) {
                                     Message messageFromClient = (Message) o;
@@ -101,6 +99,7 @@ public class Server {
                                 client.setMessage(message);
                                 client.setState(0);
                                 client.setCurrentCommand(null);
+                                client.destroyObject();
                             }
 
                             buffer.clear();
@@ -115,6 +114,7 @@ public class Server {
                                 if (msg instanceof FinishMessage) {
                                     c.setState(0);
                                     c.setCurrentCommand(null);
+                                    c.destroyObject();
                                 }
                                 c.sendResponse(ch);
                             }

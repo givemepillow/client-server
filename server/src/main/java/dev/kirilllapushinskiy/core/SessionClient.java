@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.net.SocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.DatagramChannel;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class SessionClient implements Session {
 
@@ -20,7 +23,7 @@ public class SessionClient implements Session {
 
     private Message message;
 
-    private String[] args;
+    private List<String> args = new ArrayList<>();
 
     private Object object;
 
@@ -84,15 +87,15 @@ public class SessionClient implements Session {
     }
 
     @Override
-    public String[] getArgs() {
+    public List<String> getArgs() {
         return this.args;
     }
 
     @Override
     public void setArgs(String[] args) {
-        this.args = args;
+        this.args.clear();
+        this.args.addAll(Arrays.asList(args));
     }
-
     @Override
     public void upState() {
         state += 1;

@@ -30,13 +30,13 @@ public class MaxSoundtrack extends AbstractCommand {
         System.out.println();
 
         if (AppServer.humanBeings.isEmpty()) {
-            session.setMessage(new ErrorMessage("Такой SoundtrackName отсутствует!"));
+            session.setMessage(new FinishMessage("Саундтреки отсутствуют!"));
         } else {
             HumanBeing humanBeingWithMaxSoundtrack = AppServer.humanBeings
                     .stream()
                     .max(Comparator.comparing(HumanBeing::getSoundtrackName))
                     .orElse(null);
-            session.setMessage(new FinishMessage("SoundtrackName является максимальным:\n" + humanBeingWithMaxSoundtrack));
+            session.setMessage(new FinishMessage("Следующий саундтрек является первым по алфавиту:\n" + humanBeingWithMaxSoundtrack));
         }
     }
 }

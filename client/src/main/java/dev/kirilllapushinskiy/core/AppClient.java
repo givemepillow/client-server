@@ -19,6 +19,8 @@ public class AppClient {
     static private final Command REMOVEBYID = RemoveById.init();
     static private final Command MAXSOUNDTRACK = MaxSoundtrack.init();
     static private final Command ADD = Add.init();
+    static private final Command CLEAR = Clear.init();
+    static private final Command UPDATE = Update.init();
 
     public static void main(String[] args) {
 
@@ -30,14 +32,16 @@ public class AppClient {
                 SHOW,
                 REMOVEBYID,
                 MAXSOUNDTRACK,
-                ADD
+                ADD,
+                CLEAR,
+                UPDATE
         );
 
         try {
             Client.initialization(InetAddress.getLocalHost(), 8000);
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("\n[ERROR] Connection could not be set up. :(");
+            System.out.println("\nConnection could not be set up. :(");
             return;
         }
 
@@ -57,9 +61,9 @@ public class AppClient {
             try {
                 Communicator.remoteCommandExecutionProcess(pack);
             } catch (IOException e) {
-                System.out.println("[ERROR] The command could not be sent to the server. Please, try later...\n");
+                System.out.println("The command could not be sent to the server. Please, try later...\n");
             } catch (ClassNotFoundException e) {
-                System.out.println("[ERROR] The response from the server could not be processed!");
+                System.out.println("The response from the server could not be processed!");
             }
         }
     }

@@ -32,6 +32,7 @@ public class Add extends AbstractCommand {
             case 0:
                 super.run(session);
                 hb = new HumanBeing();
+                hb.id = Integer.parseInt(session.getResponse());
                 hb.coordinates = new Coordinates();
                 hb.car = new Car();
                 session.setObject(hb);
@@ -103,6 +104,8 @@ public class Add extends AbstractCommand {
             case 11:
                 hb = (HumanBeing) session.getObject();
                 hb.car.setCool(getParameterCool(session));
+            default:
+                hb = (HumanBeing) session.getObject();
                 if (session.getState() == 12) {
                     hb.id = getParameterId();
                     hb.creationDate = ZonedDateTime.now();
@@ -111,13 +114,102 @@ public class Add extends AbstractCommand {
                     Save.run();
                     session.setMessage(new FinishMessage("Готово! Объект успешно сохранён."));
                     break;
+                } else {
+                    session.setMessage(new ErrorMessage("Ошибка состояния! [" + session.getState() + "]"));
                 }
-            default:
-                session.setMessage(new ErrorMessage("Ошибка состояния!"));
         }
 
         //HumanBeing humanBeing = getParameterHumanBeing(scanner, getParameterId());
 
+    }
+
+    public void constructHumanBeing(Session session, int updateId, String prompt) {
+        int state = session.getState();
+        HumanBeing hb;
+
+        switch (state) {
+
+            case 0:
+                super.run(session);
+                hb = new HumanBeing();
+                hb.id = updateId;
+                hb.coordinates = new Coordinates();
+                hb.car = new Car();
+                session.setObject(hb);
+                session.setMessage(new PromptMessage(prompt + "\nВведите имя:"));
+                session.upState();
+                // Введите название автомобиля.
+                break;
+            case 1:
+                hb = (HumanBeing) session.getObject();
+                hb.name = getParameterName(session);
+                if (session.getState() == 2)
+                    session.setMessage(new PromptMessage("Создание координат.\nВведите x:"));
+                break;
+            case 2:
+                hb = (HumanBeing) session.getObject();
+                hb.coordinates.setX(getParameterX(session));
+                if (session.getState() == 3)
+                    session.setMessage(new PromptMessage("Введите y:"));
+                break;
+            case 3:
+                hb = (HumanBeing) session.getObject();
+                hb.coordinates.setY(getParameterY(session));
+                if (session.getState() == 4)
+                    session.setMessage(new PromptMessage("Является ли человек реальным.\nЧеловеческое существо реально?"));
+                break;
+            case 4:
+                hb = (HumanBeing) session.getObject();
+                hb.realHero = getParameterRealHero(session);
+                if (session.getState() == 5)
+                    session.setMessage(new PromptMessage("Имеется ли у существа зубочистка.\nЧеловеческое существо с зубочисткой?"));
+                break;
+            case 5:
+                hb = (HumanBeing) session.getObject();
+                hb.hasToothpick = getParameterHasToothpick(session);
+                if (session.getState() == 6)
+                    session.setMessage(new PromptMessage("Скорость удара существа.\nВведите скорость удара:"));
+                break;
+            case 6:
+                hb = (HumanBeing) session.getObject();
+                hb.impactSpeed = getParameterImpactSpeed(session);
+                if (session.getState() == 7)
+                    session.setMessage(new PromptMessage("Саундтрек. \nВведите имя саундтрека:"));
+                break;
+            case 7:
+                hb = (HumanBeing) session.getObject();
+                hb.soundtrackName = getParameterSoundtrackName(session);
+                if (session.getState() == 8)
+                    session.setMessage(new PromptMessage("Тип оружия.\nВведите тип оружия (AXE, RIFLE, PISTOL, KNIFE, BAT):"));
+                break;
+            case 8:
+                hb = (HumanBeing) session.getObject();
+                hb.weaponType = getParameterWeaponType(session);
+                if (session.getState() == 9)
+                    session.setMessage(new PromptMessage("Введите настроение (SADNESS, LONGING, CALM, RAGE):"));
+                break;
+            case 9:
+                hb = (HumanBeing) session.getObject();
+                hb.mood = getParameterMood(session);
+                if (session.getState() == 10)
+                    session.setMessage(new PromptMessage("Характеристики машины.\nВведите название автомобиля:"));
+                break;
+            case 10:
+                hb = (HumanBeing) session.getObject();
+                hb.car.setName(getParameterNameCar(session));
+                if (session.getState() == 11)
+                    session.setMessage(new PromptMessage("Машина хорошая?"));
+                break;
+            case 11:
+                hb = (HumanBeing) session.getObject();
+                hb.car.setCool(getParameterCool(session));
+                if (session.getState() == 12) {
+                    hb.creationDate = ZonedDateTime.now();
+                }
+                break;
+            default:
+                session.setMessage(new ErrorMessage("Ошибка состояния! [" + session.getState() + "]"));
+        }
     }
 
     /*public HumanBeing getParameterHumanBeing(Scanner scanner, Integer ID) {
@@ -155,6 +247,7 @@ public class Add extends AbstractCommand {
             session.upState();
             return true;
         } else if (isReject(command)) {
+            session.upState(); // !!
             return false;
         } else {
             session.setMessage(new AnswerMessage("Некорректный аргумент для Cool (Необходимо: да или нет)!"));
@@ -214,15 +307,12 @@ public class Add extends AbstractCommand {
 
         String soundtrackName;
 
-        try {
-            soundtrackName = session.getResponse().trim();
-            if (soundtrackName.equals("")) {
-                throw new IllegalArgumentException("soundtrackName не может быть пустым!");
-            }
-        } catch (Exception exception) {
-            session.setMessage(new AnswerMessage(exception.getMessage()));
+        soundtrackName = session.getResponse().trim();
+        if (soundtrackName.equals("")) {
+            session.setMessage(new PromptMessage("Название саундтрека не может быть пустым!\nВведите имя саундтрека:"));
             return null;
         }
+
         session.upState();
         return soundtrackName;
     }
@@ -239,13 +329,13 @@ public class Add extends AbstractCommand {
 
             impactSpeed = Double.parseDouble(text);
             if (impactSpeed < 0) {
-                throw new IllegalArgumentException("impactSpeed не может быть отрицательным!");
+                throw new IllegalArgumentException("impactSpeed не может быть отрицательным!\nВведите скорость удара:");
             }
             if (impactSpeed > 10) {
-                throw new IllegalArgumentException("impactSpeed не может быть больше 10!");
+                throw new IllegalArgumentException("impactSpeed не может быть больше 10!\nВведите скорость удара:");
             }
         } catch (NumberFormatException exception) {
-            session.setMessage(new AnswerMessage("Некорректный аргумент для переменной impactSpeed (Необходимо: [0;10])!"));
+            session.setMessage(new AnswerMessage("Некорректный аргумент для переменной impactSpeed (Необходимо: [0;10])!\nВведите скорость удара:"));
             return null;
         } catch (IllegalArgumentException exception) {
             session.setMessage(new AnswerMessage(exception.getMessage()));

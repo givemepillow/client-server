@@ -7,7 +7,7 @@ public class RemoveById extends AbstractCommand {
     static private final String COMMAND_NAME = "RemoveById";
 
     protected RemoveById() {
-        super(COMMAND_NAME, false);
+        super(COMMAND_NAME, true);
     }
 
     public static RemoveById init() {

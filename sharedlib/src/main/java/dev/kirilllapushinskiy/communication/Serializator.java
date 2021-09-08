@@ -20,5 +20,4 @@ public final class Serializator {
         ObjectInputStream in = new ObjectInputStream(bis);
         return in.readObject();
     }
-
 }
