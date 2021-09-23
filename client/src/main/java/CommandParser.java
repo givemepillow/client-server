@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.EOFException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class CommandParser {
@@ -31,6 +34,28 @@ public class CommandParser {
 
     public static boolean isWithArgument() {
         return withArgument;
+    }
+
+    public static boolean readCommand(BufferedReader commands) throws IOException {
+        reset();
+        String line = (commands.readLine());
+        if (line != null) {
+            line = line.trim().replace("  ", " ");
+            if (line.equals("")) {
+                return false;
+            }
+            String[] args = line.split(" ");
+            commandName = args[0];
+            if (args.length == 2) {
+                commandArgument = args[1];
+                withArgument = true;
+            } else if (args.length > 2) {
+                throw new IllegalArgumentException("Поддерживается не более одного аргумента!\n");
+            }
+        } else {
+            throw new EOFException("Выполнение скрипта успешно завершено!\n");
+        }
+        return true;
     }
 
 
