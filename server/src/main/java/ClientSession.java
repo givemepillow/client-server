@@ -1,6 +1,4 @@
-import common.Response;
-import common.Serializator;
-import common.Session;
+import common.*;
 
 import java.io.IOException;
 import java.net.SocketAddress;
@@ -18,9 +16,35 @@ public class ClientSession implements Session {
 
     private boolean ready = false;
 
+    private HumanBeing humanBeing;
+
+    private Historian historian = new Historian();
+
     ClientSession(SocketAddress address) {
         this.id = address.hashCode();
         this.address = address;
+    }
+
+    public void setHumanBeing(HumanBeing hb) {
+        if (hb == null)
+            throw new IllegalStateException("Сущность == null!");
+        this.humanBeing = hb;
+    }
+
+    @Override
+    public String getHistory() {
+        return historian.getHistory();
+    }
+
+    @Override
+    public void setHistory(Command command) {
+        historian.addHistory(command.getCommandName());
+    }
+
+    public HumanBeing getHumanBeing() {
+        if (humanBeing == null)
+            throw new IllegalStateException("Сущность не установлена!");
+        return this.humanBeing;
     }
 
     public void setResponse(Response response) {

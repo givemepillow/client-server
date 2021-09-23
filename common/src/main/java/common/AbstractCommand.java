@@ -4,12 +4,35 @@ public abstract class AbstractCommand implements Command {
 
     private final String COMMAND_NAME;
     private final boolean REQUIRED_ARGUMENT;
+    private final boolean REQUIRED_HUMAN_BEING;
+
     private String commandArgument;
-    protected AbstractCommand(String commandName, boolean requiredArgument) {
+    private HumanBeing humanBeing;
+
+    protected AbstractCommand(String commandName, boolean requiredArgument, boolean requiredHumanBeing) {
         COMMAND_NAME = commandName;
         REQUIRED_ARGUMENT = requiredArgument;
+        REQUIRED_HUMAN_BEING = requiredHumanBeing;
     }
 
+    @Override
+    public boolean isRequiredHumanBeing() {
+        return REQUIRED_HUMAN_BEING;
+    }
+
+    @Override
+    public HumanBeing getHumanBeing() {
+        if(humanBeing == null)
+            throw new IllegalStateException("Сущность не была установлена!");
+        return humanBeing;
+    }
+
+    @Override
+    public void setHumanBeing(HumanBeing humanBeing) {
+        if (!REQUIRED_HUMAN_BEING)
+            throw new IllegalArgumentException("Данная команда не использует существо!");
+        this.humanBeing = humanBeing;
+    }
 
     @Override
     public String getCommandName() {
