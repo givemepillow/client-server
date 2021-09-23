@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.IOException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class CommandParser {
@@ -64,17 +65,21 @@ public class CommandParser {
 
     private static boolean readCommand() {
         reset();
-        String line = scanner.nextLine().trim().replace("  ", " ");
-        if (line.equals("")) {
-            return false;
-        }
-        String[] args = line.split(" ");
-        commandName = args[0];
-        if (args.length == 2) {
-            commandArgument = args[1];
-            withArgument = true;
-        } else if (args.length > 2) {
-            throw new IllegalArgumentException("Поддерживается не более одного аргумента!\n");
+        try {
+            String line = scanner.nextLine().trim().replace("  ", " ");
+            if (line.equals("")) {
+                return false;
+            }
+            String[] args = line.split(" ");
+            commandName = args[0];
+            if (args.length == 2) {
+                commandArgument = args[1];
+                withArgument = true;
+            } else if (args.length > 2) {
+                throw new IllegalArgumentException("Поддерживается не более одного аргумента!\n");
+            }
+        } catch (NoSuchElementException e) {
+            AppClient.EXIT.run();
         }
         return true;
     }

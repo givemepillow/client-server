@@ -83,6 +83,8 @@ public class Server {
                             DatagramChannel ch = (DatagramChannel) key.channel();
 
                             for (ClientSession s : sessions) {
+                                // Если по каким-то причинам поток исполняющий команду ещё не записал ответ,
+                                // про пропускаем команду.
                                 if (s.isReady())
                                     s.sendResponse(ch);
                             }
