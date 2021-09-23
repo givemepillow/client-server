@@ -1,6 +1,7 @@
 import common.CommandPackage;
 import common.Response;
 import common.Serializator;
+import common.Session;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -22,7 +23,7 @@ public class Server {
 
     private static Selector selector;
 
-    private static final ByteBuffer buffer = ByteBuffer.allocate(2048);
+    private static final ByteBuffer buffer = ByteBuffer.allocate(2048 * 50);
 
     private static final SessionCollection sessions = SessionCollection.getSessions();
 
@@ -56,17 +57,26 @@ public class Server {
                         }
 
                         if (key.isReadable()) {
+                            // Получаем данные по UDP.
                             DatagramChannel ch = (DatagramChannel) key.channel();
                             buffer.clear();
                             SocketAddress address = ch.receive(buffer);
 
+                            // Устанавливаем сессию.
                             if (!sessions.contains(address)) {
                                 sessions.add(new ClientSession(address));
                             }
+                            Session session = sessions.get(address);
 
+                            // Извлекаем команду из буфера.
                             CommandPackage pack = (CommandPackage) Serializator.deserialize(buffer);
 
-                            CommandHandler.execute(pack, sessions.get(address));
+                            // Запускаем команду на сервере.
+                            try {
+                                CommandHandler.execute(pack, sessions.get(address));
+                            } catch (IllegalStateException e) {
+                                session.setResponse(new Response(e.getMessage()));
+                            }
 
                             key.interestOps(SelectionKey.OP_WRITE);
 
