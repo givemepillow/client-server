@@ -23,7 +23,8 @@ public class AppServer {
                     MAXSOUNTRACK,
                     FILTERNAME,
                     ADDIFMIN,
-                    ADDIFMAX
+                    ADDIFMAX,
+                    CLIENTEXIT
             );
             Server.start();
 
@@ -46,4 +47,5 @@ public class AppServer {
     final static Command FILTERNAME = new FilterName();
     final static Command ADDIFMIN = new AddIfMin();
     final static Command ADDIFMAX = new AddIfMax();
+    final static Command CLIENTEXIT = new Exit();
 }

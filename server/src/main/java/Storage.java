@@ -65,24 +65,27 @@ public class Storage {
 
     public static void clear() {
         Storage.humanBeings.clear();
-        saver();
-        System.out.println("Все сущности удалены.");
+        // Убрать комментарии для сохранения в файл послед отчистки
+        //saver();
+        //System.out.println("Все сущности удалены.");
     }
 
     public static void save(HumanBeing hb) {
         hb.initId(getParameterId());
         humanBeings.add(hb);
-        saver();
-        System.out.println("Сохранена сущность с id " + hb.getId());
+        // Убрать комментарии для сохранения в файл послед добавления
+        //saver();
+        //System.out.println("Сохранена сущность с id " + hb.getId());
     }
 
     public static void remove(Integer id) {
         Storage.humanBeings.removeIf((human -> human.getId().equals(id)));
-        saver();
-        System.out.println("Удалена сущность с id " + id);
+        // Убрать комментарии для сохранения в файл послед удаления
+        //saver();
+        //System.out.println("Удалена сущность с id " + id);
     }
 
-    private static void saver() {
+    public static void saver() {
         ObjectMapper objectMapper = getObjectMapper();
         try {
             ObjectWriter writer = objectMapper.writer(new DefaultPrettyPrinter());
