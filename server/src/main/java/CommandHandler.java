@@ -18,8 +18,14 @@ public class CommandHandler {
 
     public static void execute(CommandPackage pack, Session session) {
         Command c = commands.getCommand(pack.getCommandName());
+        if(!c.isInternal())
+            session.setHistory(c);
         if(pack.isWithArgument())
             c.setCommandArgument(pack.getCommandArgument());
+        // Если команда содержит сущность, сохраняем сущность в сессию.
+        if(pack.isWithHumanBeing()) {
+            session.setHumanBeing(pack.getHumanBeing());
+        }
 
         c.run(session);
     }
