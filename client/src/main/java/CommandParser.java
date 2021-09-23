@@ -46,6 +46,9 @@ public class CommandParser {
             }
             String[] args = line.split(" ");
             commandName = args[0];
+            if (commandName.equalsIgnoreCase("execute_script")) {
+                throw new IllegalArgumentException("Запрещены вложенные скрипты! Выполнение прервано.\n");
+            }
             if (args.length == 2) {
                 commandArgument = args[1];
                 withArgument = true;
@@ -53,7 +56,7 @@ public class CommandParser {
                 throw new IllegalArgumentException("Поддерживается не более одного аргумента!\n");
             }
         } else {
-            throw new EOFException("Выполнение скрипта успешно завершено!\n");
+            throw new EOFException("Выполнение скрипта завершено!\n");
         }
         return true;
     }

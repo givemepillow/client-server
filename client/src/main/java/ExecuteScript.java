@@ -29,7 +29,7 @@ public class ExecuteScript extends AbstractCommand {
                     scriptFile.close();
                 } catch (FileNotFoundException | NullPointerException exception) {
                     System.out.println("Файл не найден (проверьте права доступа или создайте файл)!");
-                } catch (IOException | IllegalStateException exception) {
+                } catch (IOException | IllegalStateException | IllegalArgumentException exception) {
                     System.out.println(exception.getMessage() + "\n");
                 }
 
