@@ -83,7 +83,8 @@ public class Server {
                             DatagramChannel ch = (DatagramChannel) key.channel();
 
                             for (ClientSession s : sessions) {
-                                s.sendResponse(ch);
+                                if (s.isReady())
+                                    s.sendResponse(ch);
                             }
 
                             key.interestOps(SelectionKey.OP_READ);
