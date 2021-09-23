@@ -13,4 +13,8 @@ public class Response implements Serializable {
     public String toString() {
         return data + "\n";
     }
+
+    public String getData(){
+        return data;
+    }
 }
