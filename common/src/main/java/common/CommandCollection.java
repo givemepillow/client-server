@@ -31,7 +31,7 @@ public class CommandCollection extends ArrayList<Command> {
 
     public Command getCommand(String commandName) {
         if (!this.contains(commandName)) {
-            throw new IllegalStateException("Данная команда не зарегистрирована!");
+            throw new IllegalStateException("Данная команда не зарегистрирована на сервере!");
         }
         Command temp = null;
         for (Command c : this) {
