@@ -13,6 +13,8 @@ import java.nio.channels.DatagramChannel;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.util.Iterator;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
 public class Server {
@@ -36,7 +38,7 @@ public class Server {
     }
 
     public static void start() {
-
+        ExecutorService executorPool = Executors.newFixedThreadPool(50);
         try {
             channel.register(selector, SelectionKey.OP_READ);
         } catch (ClosedChannelException e) {
@@ -60,7 +62,7 @@ public class Server {
                             // Получаем данные по UDP.
                             DatagramChannel ch = (DatagramChannel) key.channel();
                             buffer.clear();
-                            SocketAddress address = ch.receive(buffer);
+                            SocketAddress address= ch.receive(buffer);
 
                             // Устанавливаем сессию.
                             if (!sessions.contains(address)) {
@@ -71,14 +73,10 @@ public class Server {
                             // Извлекаем команду из буфера.
                             CommandPackage pack = (CommandPackage) Serializator.deserialize(buffer);
 
-                            // Запускаем команду на сервере.
-                            try {
-                                CommandHandler.execute(pack, sessions.get(address));
-                            } catch (IllegalStateException e) {
-                                session.setResponse(new Response(e.getMessage()));
-                            }
+                            // Выполнение команды в отдельном потоке.
+                            executorPool.submit(() -> exec(pack, session, key));
 
-                            key.interestOps(SelectionKey.OP_WRITE);
+                            //key.interestOps(SelectionKey.OP_WRITE);
 
                         } else if (key.isWritable()) {
 
@@ -102,6 +100,23 @@ public class Server {
             }
 
         }
+
+    }
+
+    private static void exec(CommandPackage pack, Session session, SelectionKey key) {
+        // Запускаем команду на сервере. Не основной поток.
+        try {
+            CommandHandler.execute(pack, session);
+        } catch (IllegalStateException e) {
+            session.setResponse(new Response(e.getMessage()));
+        }
+
+        // Как только записали, говорим основному потоку, то что он может уже отправлять ответ.
+        key.interestOps(SelectionKey.OP_WRITE);
+        // Нужно разбудить селектор (уведомить о том, что что-то изменилось). Это необходимо из-за того, что
+        // смена ожидаемого события произошла в другом (текущем) потоке и основной поток в котором находится селектор
+        // ничего не узнал, так как селектор пробуждается сам только от событий в своём же потоке.
+        selector.wakeup();
 
     }
 
