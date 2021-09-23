@@ -2,8 +2,10 @@ import common.AbstractCommand;
 import common.Response;
 
 public abstract class RemoteCommand extends AbstractCommand {
-    protected RemoteCommand(String commandName, boolean requiredArgument) {
-        super(commandName, requiredArgument);
+
+
+    protected RemoteCommand(String commandName, boolean requiredArgument, boolean requiredHumanBeing) {
+        super(commandName, requiredArgument, requiredHumanBeing);
     }
 
     @Override

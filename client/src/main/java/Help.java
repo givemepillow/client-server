@@ -1,5 +1,5 @@
 public class Help extends RemoteCommand {
     public Help() {
-        super("help", false);
+        super("help", false, false);
     }
 }

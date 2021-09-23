@@ -5,7 +5,7 @@ import common.Session;
 public class Help extends AbstractCommand {
 
     public Help() {
-        super("help", false);
+        super("help", false, false);
     }
 
     public void run(Session session) {

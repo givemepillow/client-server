@@ -3,7 +3,7 @@ import common.AbstractCommand;
 public class Exit extends AbstractCommand {
 
     public Exit() {
-        super("exit", false);
+        super("exit", false, false);
     }
 
     @Override
