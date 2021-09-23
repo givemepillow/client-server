@@ -7,6 +7,23 @@ public class CommandPackage implements Serializable {
     private String commandName;
     private String commandArgument;
     private boolean withArgument;
+    private HumanBeing humanBeing;
+    private boolean withHumanBeing = false;
+
+    private void setHumanBeing(HumanBeing hb) {
+        this.humanBeing = hb;
+        this.withHumanBeing = true;
+    }
+
+    public HumanBeing getHumanBeing() {
+        if (!withHumanBeing)
+            throw new IllegalArgumentException("Данная команда не содержит существо!");
+        return this.humanBeing;
+    }
+
+    public boolean isWithHumanBeing() {
+        return withHumanBeing;
+    }
 
     private CommandPackage(String commandName) {
         this.commandName = commandName;
@@ -42,6 +59,9 @@ public class CommandPackage implements Serializable {
         CommandPackage pack = new CommandPackage(command.getCommandName());
         if(command.isRequiredArgument()){
             pack.setCommandArgument(command.getCommandArgument());
+        }
+        if (command.isRequiredHumanBeing()) {
+            pack.setHumanBeing(command.getHumanBeing());
         }
         return pack;
     }
