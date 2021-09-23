@@ -16,6 +16,11 @@ public abstract class AbstractCommand implements Command {
     }
 
     @Override
+    public boolean isInternal() {
+        return false;
+    }
+
+    @Override
     public boolean isRequiredHumanBeing() {
         return REQUIRED_HUMAN_BEING;
     }
