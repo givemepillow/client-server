@@ -11,6 +11,6 @@ public class Exit extends AbstractCommand {
     @Override
     public void run(Session session) {
         Storage.saver();
-        session.setResponse(new Response("Внесённые на сервере изменения сохранены."));
+        session.setResponse(new Response("Внесённые на сервере изменения сохранены в файл " + Storage.getJsonFile() +"."));
     }
 }
