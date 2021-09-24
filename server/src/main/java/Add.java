@@ -11,7 +11,7 @@ public class Add extends AbstractCommand {
     @Override
     public void run(Session session) {
         Storage.save(session.getHumanBeing());
-        Response response = new Response("Новая сущность добавлена и сохранена.");
+        Response response = new Response("Новая сущность добавлена.");
         session.setResponse(response);
     }
 }

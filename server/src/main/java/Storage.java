@@ -38,7 +38,7 @@ public class Storage {
         if (filename != null) {
             jsonFile = filename;
         } else {
-            System.err.println("Переменная окружения " + SYSTEM_VARIABLE + " НЕ ЗАДАНА!");
+            System.out.println("Переменная окружения " + SYSTEM_VARIABLE + " НЕ ЗАДАНА!");
             System.out.println("Будет использован файл по умолчанию: " + jsonFile + ".");
         }
         

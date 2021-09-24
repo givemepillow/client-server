@@ -10,7 +10,7 @@ public class Update extends AbstractCommand {
     @Override
     public void run(Session session) {
         Storage.update(session.getHumanBeing());
-        Response response = new Response("Cущность обновлена и сохранена.");
+        Response response = new Response("Cущность обновлена.");
         session.setResponse(response);
     }
 }
