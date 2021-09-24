@@ -25,7 +25,7 @@ public class Server {
 
     private static Selector selector;
 
-    private static final ByteBuffer buffer = ByteBuffer.allocate(2048 * 50);
+    private static final ByteBuffer buffer = ByteBuffer.allocate(2048 * 25);
 
     private static final SessionCollection sessions = SessionCollection.getSessions();
 
@@ -61,7 +61,6 @@ public class Server {
                         if (key.isReadable()) {
                             // Получаем данные по UDP.
                             DatagramChannel ch = (DatagramChannel) key.channel();
-                            buffer.clear();
                             SocketAddress address= ch.receive(buffer);
 
                             // Устанавливаем сессию.
@@ -75,6 +74,9 @@ public class Server {
 
                             // Выполнение команды в отдельном потоке.
                             executorPool.submit(() -> exec(pack, session, key));
+
+                            // Отчистка буфера.
+                            Server.buffer.clear();
 
                             //key.interestOps(SelectionKey.OP_WRITE);
 
