@@ -11,7 +11,6 @@ import common.HumanBeing;
 import java.io.*;
 import java.nio.file.FileSystemNotFoundException;
 import java.util.Comparator;
-import java.util.NoSuchElementException;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -28,31 +27,36 @@ public class Storage {
         return OBJECT_MAPPER;
     }
 
+    private static String jsonFile = "default.json";
+
+    public static String getJsonFile() {
+        return jsonFile;
+    }
+
     public static void init() {
         String filename = System.getenv(SYSTEM_VARIABLE);
-        String errorMessage = "Проблемы с JSON файлом!\n";
-        // https://howtodoinjava.com/java/io/java-read-file-to-string-examples/
+        if (filename != null) {
+            jsonFile = filename;
+        } else {
+            System.err.println("Переменная окружения " + SYSTEM_VARIABLE + " НЕ ЗАДАНА!");
+            System.out.println("Будет использован файл по умолчанию: " + jsonFile + ".");
+        }
+        
         StringBuilder jsonStrings = new StringBuilder();
-        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(jsonFile))) {
+
             String currentLine;
             while ((currentLine = br.readLine()) != null) {
                 jsonStrings.append(currentLine).append("\n");
             }
+            humanBeings = getObjectMapper().readValue(jsonStrings.toString(), new TypeReference<SortedSet<HumanBeing>>() {});
 
-
-            // https://www.baeldung.com/jackson-object-mapper-tutorial
-            humanBeings = getObjectMapper().readValue(jsonStrings.toString(), new TypeReference<SortedSet<HumanBeing>>(){});
-
-        } catch (NullPointerException e) {
-            errorMessage += "Убедитесь, что переменная окружения " + SYSTEM_VARIABLE + " ЗАДАНА.";
-            throw new NoSuchElementException(errorMessage);
         } catch (FileNotFoundException e) {
-            System.err.println("\nJSON файл НЕ СУЩЕСТВУЕТ при сохранении будет создан новый файл.");
-            System.out.println("Установленный путь к файлу: \"" + filename + "\"\n");
+            System.out.println("\nJSON файл НЕ СУЩЕСТВУЕТ при сохранении будет создан новый файл.");
+            System.out.println("Установленный путь к файлу: \"" + jsonFile + "\"\n");
         } catch (IOException e) {
-            errorMessage += "Убедитесь, что указанный вами файл НУЖНОГО ФОРМАТА.\n" +
-                    "Путь к файлу: \"" + filename + "\"";
-            throw new FileSystemNotFoundException(errorMessage);
+            throw new FileSystemNotFoundException("\"Проблемы с JSON файлом!\\n\";Убедитесь, что указанный вами файл НУЖНОГО ФОРМАТА.\n" +
+                    "Путь к файлу: \"" + jsonFile + "\"");
         }
     }
 
@@ -90,7 +94,7 @@ public class Storage {
         try {
             ObjectWriter writer = objectMapper.writer(new DefaultPrettyPrinter());
             String output = writer.writeValueAsString(humanBeings);
-            String filename = System.getenv(SYSTEM_VARIABLE);
+            String filename = jsonFile;
             try (
                     FileOutputStream fos = new FileOutputStream(filename);
                     PrintStream printStream = new PrintStream(fos)
@@ -103,7 +107,6 @@ public class Storage {
             e.printStackTrace();
         }
     }
-
 
 
     public static Integer getParameterId() {
