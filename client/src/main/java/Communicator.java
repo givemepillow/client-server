@@ -13,11 +13,11 @@ import java.nio.channels.DatagramChannel;
 
 public class Communicator {
 
-    private static final int SERVER_PORT = 6690;
+    private static final int SERVER_PORT = 6699;
     private static DatagramChannel channel;
     private static InetSocketAddress address;
     private static final int BUFFER_SIZE = 12*1024;
-    private static ByteBuffer buffer = ByteBuffer.allocate(BUFFER_SIZE);
+    private static final ByteBuffer buffer = ByteBuffer.allocate(BUFFER_SIZE);
     private Communicator(){
 
     }

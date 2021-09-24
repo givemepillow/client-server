@@ -31,7 +31,7 @@ public class Server {
 
     public static void init() throws IOException {
         DatagramChannel datagramChannel = DatagramChannel.open();
-        datagramChannel.bind(new InetSocketAddress(InetAddress.getLocalHost(), 6690));
+        datagramChannel.bind(new InetSocketAddress(InetAddress.getLocalHost(), 6699));
         channel = datagramChannel;
         selector = Selector.open();
         channel.configureBlocking(false);
