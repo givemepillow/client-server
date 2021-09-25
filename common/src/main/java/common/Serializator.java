@@ -13,7 +13,10 @@ public class Serializator {
         ObjectOutputStream out = new ObjectOutputStream(bos);
         out.writeObject(object);
         out.flush();
-        return ByteBuffer.wrap(bos.toByteArray());
+        ByteBuffer buffer = ByteBuffer.wrap(bos.toByteArray());
+        if (buffer.capacity() >= 25 * 1024)
+            throw new IllegalStateException("Переполнение буфера!");
+        return buffer;
     }
 
     static public Object deserialize(ByteBuffer buffer) throws IOException, ClassNotFoundException {

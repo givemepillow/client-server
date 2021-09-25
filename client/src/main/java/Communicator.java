@@ -16,7 +16,7 @@ public class Communicator {
     private static final int SERVER_PORT = 6699;
     private static DatagramChannel channel;
     private static InetSocketAddress address;
-    private static final int BUFFER_SIZE = 12*1024;
+    private static final int BUFFER_SIZE = 25 * 1024;
     private static final ByteBuffer buffer = ByteBuffer.allocate(BUFFER_SIZE);
     private Communicator(){
 

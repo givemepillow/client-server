@@ -25,7 +25,7 @@ public class Server {
 
     private static Selector selector;
 
-    private static final ByteBuffer buffer = ByteBuffer.allocate(2048 * 25);
+    private static final ByteBuffer buffer = ByteBuffer.allocate(1024 * 5);
 
     private static final SessionCollection sessions = SessionCollection.getSessions();
 
@@ -88,7 +88,13 @@ public class Server {
                                 // Если по каким-то причинам поток исполняющий команду ещё не записал ответ,
                                 // про пропускаем команду.
                                 if (s.isReady())
-                                    s.sendResponse(ch);
+                                    try {
+                                        s.sendResponse(ch);
+                                    } catch (IllegalStateException e) {
+                                        s.setResponse(new Response(e.getMessage()));
+                                        s.sendResponse(ch);
+                                    }
+
                             }
 
                             key.interestOps(SelectionKey.OP_READ);
